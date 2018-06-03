@@ -12,11 +12,11 @@ function PlayerPreview(props) {
           alt={'Avatar for '+props.username}
         />
         <h2 className='username'>@{props.username}</h2>
-      </div>
       <button
         className='reset'
         onClick={props.onReset.bind(null, props.id)}
       >Reset</button>
+      </div>
     </div>
   )
 }
@@ -136,6 +136,7 @@ class Battle extends React.Component {
     var playerTwoName = this.state.playerTwoName;
     var playerOneImage = this.state.playerOneImage;
     var playerTwoImage = this.state.playerTwoImage;
+    var match = this.props.match;
 
     return (
        <div className='home-container'>
@@ -170,7 +171,17 @@ class Battle extends React.Component {
             id='playerTwo'
           /> }
         </div>
-
+         { playerOneImage && playerTwoImage &&
+            <Link
+              className='button'
+              to={{
+                pathname: match.url + '/results',
+                search: '?playerOneName='+playerOneName+'&playerTwoName='+playerTwoName
+              }}
+            >
+              Battle
+            </Link>
+         }
       </div>
     );
   }
